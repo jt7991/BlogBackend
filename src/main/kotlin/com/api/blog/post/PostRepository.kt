@@ -1,11 +1,12 @@
 package com.api.blog.post
 
-import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.NoRepositoryBean
 import org.springframework.data.repository.query.Param
-import org.springframework.data.rest.core.annotation.RepositoryRestResource
+import java.util.*
 
-@RepositoryRestResource(collectionResourceRel = "posts", path = "posts")
-public interface PostRepository: PagingAndSortingRepository<Post, Long> {
-    fun findByTitle(@Param("title") title: String?): List<Post>
-
+@NoRepositoryBean
+interface PostRepository<T>: JpaRepository<T, Long> {
+    fun findBySlug(@Param("slug") slug: String?): List<T>
+    fun findByAuthor_UsernameAndTimestampBefore(@Param("authorUsername") author: String, @Param("timeBefore") timestamp: Date)
 }
