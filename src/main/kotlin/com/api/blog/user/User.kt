@@ -5,6 +5,7 @@ import com.api.blog.post.blogPost.BlogPost
 import com.api.blog.post.howToArticle.HowToArticle
 import java.util.*
 import javax.persistence.*
+import kotlin.jvm.Transient
 
 @Entity
 @Table(name="`user`")
@@ -16,8 +17,7 @@ class User {
     var firstName: String = "";
     var lastName: String = "";
     var email: String = "";
-    @OneToMany(mappedBy = "author")
-    var blogPosts: List<BlogPost?> = emptyList();
-    @OneToMany(mappedBy = "author")
-    var howToPosts: List<HowToArticle?> = emptyList();
+
+    @OneToMany(mappedBy = "author", targetEntity = Post::class)
+    var posts: List<Post> = emptyList()
 }
