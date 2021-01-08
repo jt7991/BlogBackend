@@ -10,8 +10,8 @@ class PublicationController {
     lateinit var publicationService: PublicationService
 
     @PostMapping("publish")
-    fun publishPosts(publicationList: List<Publication>){
-        
+    fun publishPost(publicationList: List<Publication>){
+        publicationService.publishAll(publicationList)
     }
 
 }
